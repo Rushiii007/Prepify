@@ -22,24 +22,23 @@ def home():
 
 @app.get("/subjects")
 def subjects():
-    return ["physics","chemistry","mathematics"]
+    return ["physics", "chemistry", "mathematics"]
 
 @app.get("/chapters/{subject}")
 def chapters(subject: str):
     ans = []
-    for name,obj in db.chapters_dict.items():
-        if obj.parent_subject.lower()==subject.lower():
+    for name, obj in db.chapters_dict.items():
+        if obj.parent_subject.lower() == subject.lower():
             ans.append(name)
     return sorted(ans)
 
-@app.get("/questions/{chapter}")
-def questions(chapter:str):
 
-    print("REQUEST RECEIVED")
-    print(chapter)
+@app.get("/test/{chapter}")
+def test(chapter: str):
+    print("=" * 50)
+    print("TEST REQUEST:", chapter)
 
     try:
-
         filt = Filter(db.chapters_dict)
 
         qs = (
@@ -49,16 +48,21 @@ def questions(chapter:str):
             .get()
         )
 
-        print("Question Count:",len(qs))
+        print("SUCCESS")
+        print("Question Count:", len(qs))
 
         return {
-            "count":len(qs)
+            "count": len(qs)
         }
 
-    except Exception:
-
+    except Exception as e:
+        print("ERROR:")
         traceback.print_exc()
-
         return {
-            "error":"failed"
+            "error": str(e)
         }
+
+
+@app.get("/questions/{chapter}")
+def questions(chapter: str):
+    return test(chapter)
