@@ -1,0 +1,3 @@
+fastapi
+uvicorn
+jee-data-base
