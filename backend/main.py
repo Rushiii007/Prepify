@@ -1,3 +1,4 @@
+from datetime import datetime
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
@@ -53,7 +54,7 @@ def get_questions(chapter: str):
         questions = (
             filter_obj
             .by_chapter(chapter)
-            .by_n_last_yrs(5)
+            .by_n_last_yrs(2)
             .get()
         )
         result = []
