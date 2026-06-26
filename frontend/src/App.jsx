@@ -3,7 +3,7 @@ import parse from "html-react-parser";
 import "katex/dist/katex.min.css";
 import renderMathInElement from "katex/contrib/auto-render";
 import "./App.css";
-const API_BASE = "https://prepify-ooxa.onrender.com/";
+const API_BASE = "https://prepify-ooxa.onrender.com";
 const LATEX_DELIMS = [
   { left: "$$", right: "$$", display: true },
   { left: "\\[", right: "\\]", display: true },
